@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Book
-from .serializers import BookSerializers
-from rest_framework import status
+from .models import Book, School
+from .serializers import BookSerializers, SchoolSerializers
+from rest_framework import status, generics
 # Create your views here.
 
 
@@ -56,5 +56,14 @@ def delete_book(request,id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     book.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class Schoollist(generics.ListCreateAPIView):
+    queryset = School.objects.all()
+    serializer_class = SchoolSerializers
+
+class Schoollistdetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = School.objects.all()
+    serializer_class = SchoolSerializers
         
 

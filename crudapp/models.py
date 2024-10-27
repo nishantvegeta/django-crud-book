@@ -6,4 +6,11 @@ class Book(models.Model):
     author = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.title
+        return self.title + ' ' + self.author
+
+class School(models.Model):
+    name = models.CharField(max_length=20)
+    address = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name
